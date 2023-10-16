@@ -1,0 +1,112 @@
+---
+title: "Intro to RNA-seq"
+subtitle: "Day One"
+author: "Brandon Le"
+date: October 18, 2023
+date-modified: "10-18-2023"
+institute: "Genomics Building 1207G"
+code-line-numbers: true
+code-overflow: scroll
+affiliation: "IIGB, University of California, Riverside"
+format: 
+  revealjs:
+    theme: simple
+    scrollable: true
+editor: visual
+slide-number: true
+title-slide-attributes:
+    data-background-image: img/UCR-BC-logo-800x200.png
+    data-background-size: 70%
+    data-background-opacity: "1"
+    data-background-position: "top"
+chalkboard: true
+---
+
+# About the Core
+
+## IIGB Bioinformatics Core
+
+:::{.panel-tabset}
+
+### Website {.smaller}
+<https://facility.bioinformatics.ucr.edu>  
+
+![](img/BC-backsplash.png){.absolute width="600"}
+
+
+### Services {.smaller}
+
+-   Data analysis
+    -   RNA-seq, ChIP-seq
+    -   scRNA-seq
+    -   DNA-seq
+    -   Other
+-   Project consultations
+-   Method development
+
+### Workshops
+
+-   [Repositories](https://github.com/orgs/bioinformatics-workshop/repositories)
+-   Past workshops
+    -   [Intro to Unix](https://github.com/bioinformatics-workshop/Intro-to-Unix)
+    -   [Intro to R/R-Studio](https://github.com/bioinformatics-workshop/Intro-to-R-RStudio) 
+    -   [Intro to Shell Scripting](https://github.com/bioinformatics-workshop/Intro-to-Shell-Scripting)
+
+### Office Hour
+
+-   Daily (2-3PM)
+-   In-person or via Zoom (by appt)
+-   [Calendly](https://calendly.com/ucr_iigb_bioinfocore)
+
+:::
+
+# Workshop Outline
+
+## Day One
+
+-   Basic introduction to RNA-seq
+-   Data analysis setup
+-   Data QC
+-   Sequence alignment
+
+## Day Two
+
+-   Data pre-processing
+-   Differential expression analysis
+
+# Day One
+
+## What is RNA-seq? {.smaller}
+
+RNA sequencing or **RNA-seq** is one of many method used for gene expression studies by obtaining a snapshot of the RNA molecules within a biological system. 
+
+The method involves the sequencing of complementary DNA (cDNA) within a population of cells.
+
+Next-generation sequencing (NGS) technologies include:
+
+-   Short-read based (e.g. Illumina)
+
+-   Long-read based (e.g., PacBio, Oxford Nanopore)
+
+RNA-seq reviews
+
+-   RNA Sequencing Data: Hitchhiker’s Guide to Expression Analysis \
+[Van den Berge et. al (2019) Annu Rev Biomed Data Sci](https://www.annualreviews.org/doi/10.1146/annurev-biodatasci-072018-021255)
+
+
+## Transcriptome profiling methods
+
+[Table Highlighting various transcriptomic methods](https://www.nature.com/articles/nrg2484/tables/1)
+
+-   cDNA or EST sequencing
+-   Microarrays
+-   RNA-seq
+
+
+## Transcriptome profiling resolution
+
+-   Bulk tissue (bulk RNA-seq)
+-   Laser-capture microdissection (LCM + RNA-seq)
+-   Single-cell (scRNA-seq)
+-   Spatial transcriptomics (spatial scRNA-seq)
+
