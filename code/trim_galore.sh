@@ -1,0 +1,33 @@
+#!/bin/bash -l
+
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=4
+#SBATCH --mem=16G
+#SBATCH --time=06:00:00     # 6 hours
+#SBATCH --job-name="trim_galore"
+#SBATCH --output=log/%x_%j.log
+#SBATCH -p batch # This is the default partition, you can use any of the following; intel, batch, highmem, gpu
+
+################### Trim_galore.sh ###################
+
+# Load conda environment
+conda activate trim_galore
+
+# trim_galore 0.6.7
+# cutadapt 3.5
+# fastqc 0.11.9
+# pigz 2.6
+
+# Reading in variables
+SAMPLENAME=$1
+FQ1=$2
+FQ2=$3
+OUT_DIR=analysis/trim_galore
+
+# Create analysis folder (if it doesn't exist)
+[ ! -d "$OUT_DIR" ] && mkdir -p "$OUT_DIR"
+
+# Running trim_galore
+trim_galore --fastqc --gzip --trim-n -j 4 --paired -o $OUT_DIR --basename ${SAMPLENAME} ${FQ1} ${FQ2}
+
