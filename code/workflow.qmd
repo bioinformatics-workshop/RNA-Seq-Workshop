@@ -24,7 +24,7 @@ link-external-newwindow: true
 Below is a general workflow for the processing and analysis of the RNA-seq dataset. Code chunks were implemented on the UCR HPCC cluster.
 
 ## Obtain SRA sample list
-We will obtain a SRA sample list containing information for a BioProject stored in the SRA database. Input for the list is the BioProject ID: PRNAxxxxxxxx
+We will obtain a SRA sample list containing information for a BioProject stored in the SRA database. Input for the list is the BioProject ID: PRJNA950346
 
 ```sh
 sbatch code/sra_list_download.sh

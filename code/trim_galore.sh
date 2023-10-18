@@ -12,12 +12,7 @@
 ################### Trim_galore.sh ###################
 
 # Load conda environment
-conda activate trim_galore
-
-# trim_galore 0.6.7
-# cutadapt 3.5
-# fastqc 0.11.9
-# pigz 2.6
+module load trim_galore
 
 # Reading in variables
 SAMPLENAME=$1
@@ -31,3 +26,5 @@ OUT_DIR=analysis/trim_galore
 # Running trim_galore
 trim_galore --fastqc --gzip --trim-n -j 4 --paired -o $OUT_DIR --basename ${SAMPLENAME} ${FQ1} ${FQ2}
 
+# Running trim_galore (single-end)
+# trim_galore --fastqc --gzip --trim-n -j 4 -o $OUT_DIR --basename ${SAMPLENAME} ${FQ1}

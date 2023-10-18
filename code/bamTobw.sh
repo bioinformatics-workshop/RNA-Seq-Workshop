@@ -12,7 +12,7 @@
 # Since the dataset is non-stranded, we can convert directly from the BAM file
 
 # Load deeptools
-module load deeptools/3.5.1
+module load deeptools
 
 # Set variables
 SAMPLENAME=$1

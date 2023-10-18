@@ -9,7 +9,7 @@
 ##################################################################
 
 ## Load STAR environment
-source activate star #v2.7.9a
+module load star
 
 ## Setting variables
 SAMPLENAME=$1

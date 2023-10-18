@@ -12,6 +12,7 @@ format:
   revealjs:
     theme: simple
     scrollable: true
+    smaller: false
 editor: visual
 slide-number: true
 title-slide-attributes:
@@ -19,8 +20,9 @@ title-slide-attributes:
     data-background-size: 70%
     data-background-opacity: "1"
     data-background-position: "top"
-chalkboard: true
+chalkboard: false
 link-external-newwindow: true
+embed-resources: true
 ---
 
 # About the Core
@@ -101,91 +103,42 @@ RNA sequencing or **RNA-seq** is one of many methods used for gene expression st
 -   Single-cell (scRNA-seq)
 -   Spatial transcriptomics (spatial + scRNA-seq)
 
-## Logging in to the server
+## Logging in to the server {.smaller}
+<br>
+
+You should receive an email with login information if you've never had an account on the HPCC. For those with an account already, you can use the same credentials to log into the server.
+
+Open up your terminal program (on your Mac or PC) and at the `$` prompt, enter the following command (change 'username' to your account name)
+
 <br>
 
 ```sh
 ssh username@cluster.hpcc.ucr.edu
 ```
 
-## Anatomy of a FASTQ file {.smaller}
 
-Fastq files contain the raw sequence and the base quality score. Each sequence is comprised of four lines.
-
-1. The sequence header (starts with @) and contain identifiers for the read
-2. The sequence
-3. '+''
-4. Base quality scores 
-
-```sh
-@VH01192:45:AAC7JMMM5:1:1101:19973:1000 1:N:0:AGTTCAGG+TCTGTTGG
-NATGGGACAGACATGCTGGCGGCACTCACTCACTTGGGCGGCTTAGATCGGAAGAGCACACGTCTGAACTCCAGTCACAGTTCAGGATCTCGTATTCCCTTTTTTTTTTGTAAATTTTTGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
-+
-#-C;;CCCCC-C-CCCCCCCCC-CCCCCCCCCCCCCCCCCCC-CCCCCCCC-CC-CCCCCCCCC-CC-CCCCCCCCC;-C--CC-CCCC--CC-C--;---;C----;-;CC-------C-C-C-C--CCCC-;C;CCC-CCCCCCCCCCC
-@VH01192:45:AAC7JMMM5:1:1101:20125:1000 1:N:0:AGTTCAGG+TCTGTTGG
-NCCCAGCCCCAGCGACTCCTAATAAAGCATTTCAGCAAATAAAAAAAAAAAAAAAAAGATCGGAAGAGCACACGTCTGAACTCAAGTCACAGTTCAGGATGTGGTTTTTGGTTTTTTTTTTTTTAAATTTTGGGGGGGGGGGGGGGGGGGG
-+
-#CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC--CCCCCCCCCCCCCCCC;CCCC-CCCCCCCCCC---C-C---C-CC-CCCCC;CC-CC-C--;C-CC-------C-C---C-C----CC;C-CCCC;C;CCCCCCCCCCCC
-@VH01192:45:AAC7JMMM5:1:1101:21034:1000 1:N:0:AGTTCAGG+TCTGTTGG
-NTTGCAATGCTCAATAAGTCTATTCCACCTCAGTGTCCTTTTTAAAGAGTTTTGGAAAAAAAAAAAAAAAAAAAGATCGTAAGAGCACACGTCTGAACTCCAGTCACAGTTCAGGTTGTGGGTTTTCGTGTTTTTGTTTTTATTTTTGGGG
-+
-#CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC-CCCCC;C;CCCCCCCCCCCCCCCCCCCCCCCCCC-CC;C-CC-C;CCCCCC;C;CC-CCCCC;;;CCC-;;C;-;-C---C-C;;;--C-CCCC---C;C-----C;--C-
-@VH01192:45:AAC7JMMM5:1:1101:21488:1000 1:N:0:AGTTCAGG+TCTGTTGG
-NCCTCAAAAAAAAAAAAAAAAAAAAAAAAAATTTGGTATGTGAAATTTTTTTAATACATTTAAATTTTATGTTTTTGTTTTTCTTTTTTTTTTTTTTAAATATTGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
-+
-#CCCCCCCCCCCCCCCCCCCCCCCCCCCCC-;---C-C;-;------CCCCCC;--CC--C-C-;-C-C--;C;-----C-C--CCCC-C--;C-C---C-;C;-C-C;CCCCCCCCC;CCCCC-CCCCCCCCCCC;C;CCCCCCCC;CCC
-```
-
-## Anatomy of a FASTQ file {.smaller}
-<br>
-@VH01192:45:AAC7JMMM5:1:1101:19973:1000 1:N:0:AGTTCAGG+TCTGTTGG
-
-| Identifier  | Description  |
-|--------|--------|
-| VH01192  | unique instrument id   |
-| 45   | run id   |
-| AAC7JMMM5 | flowcell id   |
-|   1   | flowcell lane  |
-| 1101  | tile number within the flowcell lane  |
-| 19973 | x-coordinate of the cluster within the tile   |
-| 1000  | y-coordinate of the cluster within the tile  |
-| 1 | Member of a read/mate pair, 1 or 2  |
-| N | Y if the read is filtered, N otherwise  |
-| 0 | 0 when none of the control bits are on  |
-| AGTTCAGG+TCTGTTGG  |   Index sequence  |
-
-: Sequence Header identifier
-
-## Anatomy of a SAM/BAM file {.smaller}
-
-Sequence alignment map (SAM) format official documentation is available [here](http://samtools.github.io/hts-specs/SAMv1.pdf). The SAM file consists of a header and rows for each read. Each row contains 11 mandatory fields.
-
-<br>
-
-```sh
-H01192:45:AAC7JMMM5:1:2302:15751:47175 
-99      
-chr1    
-3062288 
-255     
-17M215799N29M   
-=       
-3062288 
-215845  
-TTTTTTTTTTTTTTCTGATATCTAATAAAAATTGAACAAAAAAAAG  
-CCCCCCCCCCCC;CCCC-C-CCCCCC;CCCCCCCCCCCCCCCCCCC  
-NH:i:1  HI:i:1  AS:i:72 nM:i:0
-```
 
 ## Setting up the analysis directory {.smaller}
 
+We will clone the GitHub repository for this workshop. The repo is stored at:
+
+[GitHub Repo](https://github.com/bioinformatics-workshop/RNA-Seq-Workshop/tree/main)
+
 <br>
+
+```sh
+git clone https://github.com/bioinformatics-workshop/RNA-Seq-Workshop.git
+```
+
+<br>
+The directory structure should look like this:
 
 ```sh
 ├── analysis
 │   ├── deseq2
 │   ├── fastqc
 │   ├── featurecounts
+│   ├── multiqc
 │   ├── star
 │   └── trim_galore
 ├── code
@@ -195,49 +148,64 @@ NH:i:1  HI:i:1  AS:i:72 nM:i:0
 └── raw
 ```
 
+## Create conda environment {.smaller}
 
-## Toolkit {.smaller}
+We will create a conda environment containing bioinformatics software packages not readily available on the cluster for data processing and analysis. This conda environment includes special R packages (e.g., EnhancedVolcano) and software (e.g.,multiqc).
+
+<br>
+
+To create the conda environment:
+
+<br>
+
+```sh
+conda create --name DEG-analysis --file code/conda_spec_file.txt
+```
+
+
+## Analysis Toolkit {.smaller}
 
 **Quality Control**
 
--   Fastqc
+-   `Fastqc`
     -   [Ref](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
     -   [Software](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
--   Trim_galore
+-   `Trim_galore`
     -   [Ref](https://zenodo.org/records/7598955)
     -   [Software](https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/)
 
--   Multiqc
+-   `Multiqc`
     -   [Ref](https://academic.oup.com/bioinformatics/article/32/19/3047/2196507)
     -   [Software](https://multiqc.info)
     -   [Manual](https://multiqc.info/docs/)
 
 **Sequence Alignment**
 
--   STAR
+-   `STAR`
     -   [Ref](https://academic.oup.com/bioinformatics/article/29/1/15/272537)
     -   [Software](https://github.com/alexdobin/STAR/releases)
     -   [Manual](https://github.com/alexdobin/STAR/blob/master/doc/STARmanual.pdf)
 
 **Quantification**
 
--   featureCounts
+-   `featureCounts`
     -   [Ref](https://academic.oup.com/bioinformatics/article/30/7/923/232889)
     -   [Software](https://sourceforge.net/projects/subread/files/subread-2.0.6/)
     -   [Manual](https://subread.sourceforge.net/featureCounts.html)
 
 **Differential expression**
 
--   DESeq2
+-   `DESeq2`
     -   [Ref](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-014-0550-8)
     -   [Software](https://www.bioconductor.org/packages/release/bioc/html/DESeq2.html)
     -   [Guide](https://bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html)
 
 **Data Visualization**
 
--   IGV 
+-   `IGV` 
     -   [Ref](https://academic.oup.com/bib/article/14/2/178/208453)
     -   [Software](https://igv.org/doc/desktop/)
+    -   [Web App](https://igv.org/app/)
 
 **R and R packages**
 
@@ -269,6 +237,16 @@ NH:i:1  HI:i:1  AS:i:72 nM:i:0
 
 **Sequencing**: Illumina paired-end 150bp
 
+## Workflow Outline {.smaller}
+
+-   Create metadata
+-   QC using `Fastqc` and `trim_galore`
+-   Genome indexing for `STAR` aligner
+-   Sequence alignment with `STAR`
+-   Gene quantification using `featureCounts`
+-   Differential expression analysis with `DESeq2`
+-   Data visualization in IGV
+
 ## Workflow - Create metadata {.smaller}
 
 Generate a `metadata.csv` file containing information about the dataset. The metadata will be used for processing and differential expression analysis.
@@ -283,6 +261,98 @@ SRR24016004,Col-0,wt,7-day-old seedlings without treatment,seedlings,2,wt_2,raw/
 SRR24016005,Col-0,wt,7-day-old seedlings without treatment,seedlings,3,wt_3,raw/SRR24016005_1.fastq.gz,raw/SRR24016005_2.fastq.gz
 ```
 
+<br>
+
+The `metadata_sub1M.csv` contains info referencing the sub-sampled dataset
+
+```sh
+srr_id,ecotype,genotype,treatment,tissue,biorep,samplename,fq1,fq2
+SRR24016000_sub1M,Col-0,miR163_mut,7-day-old seedlings without treatment,seedlings,1,mir163_1,raw/SRR24016000_sub1M_1.fastq.gz,raw/SRR24016000_sub1M_2.fastq.gz
+SRR24016001_sub1M,Col-0,miR163_mut,7-day-old seedlings without treatment,seedlings,2,mir163_2,raw/SRR24016001_sub1M_1.fastq.gz,raw/SRR24016001_sub1M_2.fastq.gz
+SRR24016002_sub1M,Col-0,miR163_mut,7-day-old seedlings without treatment,seedlings,3,mir163_3,raw/SRR24016002_sub1M_1.fastq.gz,raw/SRR24016002_sub1M_2.fastq.gz
+SRR24016003_sub1M,Col-0,wt,7-day-old seedlings without treatment,seedlings,1,wt_1,raw/SRR24016003_sub1M_1.fastq.gz,raw/SRR24016003_sub1M_2.fastq.gz
+SRR24016004_sub1M,Col-0,wt,7-day-old seedlings without treatment,seedlings,2,wt_2,raw/SRR24016004_sub1M_1.fastq.gz,raw/SRR24016004_sub1M_2.fastq.gz
+SRR24016005_sub1M,Col-0,wt,7-day-old seedlings without treatment,seedlings,3,wt_3,raw/SRR24016005_sub1M_1.fastq.gz,raw/SRR24016005_sub1M_2.fastq.gz
+```
+
+
+## Anatomy of a FASTQ file {.smaller}
+
+Fastq files contain the raw sequence and the base quality score. 
+Each sequence is comprised of four lines.
+
+<br>
+
+```sh
+The sequence header (starts with @) and contain identifiers for the read
+The sequence
+'+'
+Base quality scores 
+```
+<br>
+
+```sh
+@VH01192:45:AAC7JMMM5:1:1101:19973:1000 1:N:0:AGTTCAGG+TCTGTTGG
+NATGGGACAGACATGCTGGCGGCACTCACTCACTTGGGCGGCTTAGATCGGAAGAGCACACGTCTGAACTCCAGTCACAGTTCAGGATCTCGTATTCCCTTTTTTTTTTGTAAATTTTTGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
++
+#-C;;CCCCC-C-CCCCCCCCC-CCCCCCCCCCCCCCCCCCC-CCCCCCCC-CC-CCCCCCCCC-CC-CCCCCCCCC;-C--CC-CCCC--CC-C--;---;C----;-;CC-------C-C-C-C--CCCC-;C;CCC-CCCCCCCCCCC
+@VH01192:45:AAC7JMMM5:1:1101:20125:1000 1:N:0:AGTTCAGG+TCTGTTGG
+NCCCAGCCCCAGCGACTCCTAATAAAGCATTTCAGCAAATAAAAAAAAAAAAAAAAAGATCGGAAGAGCACACGTCTGAACTCAAGTCACAGTTCAGGATGTGGTTTTTGGTTTTTTTTTTTTTAAATTTTGGGGGGGGGGGGGGGGGGGG
++
+#CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC--CCCCCCCCCCCCCCCC;CCCC-CCCCCCCCCC---C-C---C-CC-CCCCC;CC-CC-C--;C-CC-------C-C---C-C----CC;C-CCCC;C;CCCCCCCCCCCC
+@VH01192:45:AAC7JMMM5:1:1101:21034:1000 1:N:0:AGTTCAGG+TCTGTTGG
+NTTGCAATGCTCAATAAGTCTATTCCACCTCAGTGTCCTTTTTAAAGAGTTTTGGAAAAAAAAAAAAAAAAAAAGATCGTAAGAGCACACGTCTGAACTCCAGTCACAGTTCAGGTTGTGGGTTTTCGTGTTTTTGTTTTTATTTTTGGGG
++
+#CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC-CCCCC;C;CCCCCCCCCCCCCCCCCCCCCCCCCC-CC;C-CC-C;CCCCCC;C;CC-CCCCC;;;CCC-;;C;-;-C---C-C;;;--C-CCCC---C;C-----C;--C-
+@VH01192:45:AAC7JMMM5:1:1101:21488:1000 1:N:0:AGTTCAGG+TCTGTTGG
+NCCTCAAAAAAAAAAAAAAAAAAAAAAAAAATTTGGTATGTGAAATTTTTTTAATACATTTAAATTTTATGTTTTTGTTTTTCTTTTTTTTTTTTTTAAATATTGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
++
+#CCCCCCCCCCCCCCCCCCCCCCCCCCCCC-;---C-C;-;------CCCCCC;--CC--C-C-;-C-C--;C;-----C-C--CCCC-C--;C-C---C-;C;-C-C;CCCCCCCCC;CCCCC-CCCCCCCCCCC;C;CCCCCCCC;CCC
+```
+
+## Anatomy of a FASTQ file header {.smaller}
+<br>
+@VH01192:45:AAC7JMMM5:1:1101:19973:1000 1:N:0:AGTTCAGG+TCTGTTGG
+<br>
+
+:::: {.columns}
+
+::: {.column width="40%"}
+
+```sh
+VH01192
+45
+AAC7JMMM5
+1
+1101
+19973
+1000
+1
+N
+0
+AGTTCAGG+TCTGTTGG
+```
+:::
+
+::: {.column width="60%"}
+
+```sh
+unique instrument id
+run id
+flowcell id
+flowcell lane
+tile number within the flowcell lane
+x-coordinate of the cluster within the tile
+y-coordinate of the cluster within the tile
+Member of a read/mate pair, 1 or 2
+Y if the read is filtered, N otherwise
+0 when none of the control bits are on
+Index sequence
+```
+:::
+
+::::
+
 ## Workflow - QC {.smaller}
 
 We will run QC using `Fastqc` and `trim_galore`. 
@@ -291,7 +361,7 @@ We will run QC using `Fastqc` and `trim_galore`.
 
 ::: {.panel-tabset}
 
-### Code
+### Job submission
 
 ```sh
 while IFS=, read -r srr_id eco geno trt tiss biorep samplename fq1 fq2
@@ -300,7 +370,44 @@ do
   sbatch code/trim_galore.sh $samplename $fq1 $fq2
 done < <(tail -n +2 raw/metadata.csv)
 ```
+
+### fastqc.sh
+
+```sh
+#!/bin/bash -l
+
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=4
+#SBATCH --mem=16G
+#SBATCH --time=04:00:00     # 4 hours
+#SBATCH --job-name="fastqc"
+#SBATCH --output=log/%x_%j.log
+#SBATCH -p batch # This is the default partition, you can use any of the following; intel, batch, highmem, gpu
+
+module load fastqc
+
+# Load variables
+SRR_ID=$1
+IN_DIR=raw
+OUT_DIR=analysis/fastqc
+
+# Create analysis folder (if it doesn't exist)
+[ ! -d "$OUT_DIR" ] && mkdir -p "$OUT_DIR"
+
+# -t : threads
+# --noextract : do not extract zip output files
+
+fastqc -f fastq -t 4 --noextract -o $OUT_DIR $IN_DIR/${SRR_ID}*.fastq.gz
+
+
+```
+
 ### Fastqc Output
+
+[Good data example](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/good_sequence_short_fastqc.html)
+
+[Bad data example](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/bad_sequence_fastqc.html)
 
 ```sh
 $ ls analysis/fastqc
@@ -330,7 +437,45 @@ SRR24016005_2_fastqc.html
 SRR24016005_2_fastqc.zip
 ```
 
+### trim_galore.sh
+
+```sh
+#!/bin/bash -l
+
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=4
+#SBATCH --mem=16G
+#SBATCH --time=06:00:00     # 6 hours
+#SBATCH --job-name="trim_galore"
+#SBATCH --output=log/%x_%j.log
+#SBATCH -p batch # This is the default partition, you can use any of the following; intel, batch, highmem, gpu
+
+################### Trim_galore.sh ###################
+
+# Load conda environment
+module load trim_galore
+
+# Reading in variables
+SAMPLENAME=$1
+FQ1=$2
+FQ2=$3
+OUT_DIR=analysis/trim_galore
+
+# Create analysis folder (if it doesn't exist)
+[ ! -d "$OUT_DIR" ] && mkdir -p "$OUT_DIR"
+
+# Running trim_galore
+trim_galore --fastqc --gzip --trim-n -j 4 --paired -o $OUT_DIR --basename ${SAMPLENAME} ${FQ1} ${FQ2}
+
+# Running trim_galore (single-end)
+# trim_galore --fastqc --gzip --trim-n -j 4 -o $OUT_DIR --basename ${SAMPLENAME} ${FQ1}
+
+```
+
 ### Trim_galore Output
+
+The 'val_1' and 'val_2' files are the validated files after `trim_galore` processing. These files will be the input for the `STAR` alignment.
 
 ```sh
 $ ls analysis/trim_galore
@@ -383,22 +528,66 @@ wt_3_val_2_fastqc.html
 wt_3_val_2_fastqc.zip
 wt_3_val_2.fq.gz
 ```
+
 :::
 
 ## Workflow - STAR Indexing {.smaller}
 
 To run the STAR aligner, we first need to create an index of the genome.
 
+To generate an index, you'll need the following files:
+
+FASTA: Fasta file containing sequences of all the chromosomes/scaffolds for the genome
+
+GTF/GFF: General Transfer Format (GTF) or General Feature Format (GFF)
+
+::: {.callout-note}
+You only need to run the indexing step once. The indexed files can be used for alignments for all subsequent samples
+:::
+
+::: {.callout-warning}
+For assembled genomes containing large number of scaffolds or large genomes, this process can take some time and may require adjusting the indexing parameters.
+:::
+
+
+::: {.panel-tabset}
+
+### Job submission
+
 ```sh
 sbatch code/STAR-index.sh
 ```
 
-To generate an index, you'll need the following files:
+### STAR-index.sh
 
-FASTA: Fasta file containing sequences of all the chromosomes/scaffolds for the genome
-GTF/GFF: General Transfer Format (GTF) or General Feature Format (GFF)
+```sh
+#!/bin/bash
+#SBATCH --partition=batch
+#SBATCH --cpus-per-task=32
+#SBATCH --mem=100g
+#SBATCH --time=1-23:00:00
+#SBATCH --job-name="STAR-index"
+#SBATCH --output=log/%x_%j.log
 
-::: {.panel-tabset}
+## Load environment
+module load star
+
+NAME=ara11
+FASTA=genome/genome/TAIR10_Chr.all.fasta
+GTF=genome/Araport11_GFF3_genes_transposons.201606.gtf
+GFF=genome/genome/Araport11_GFF3_genes_transposons.201606.gff
+IDX_DIR=index
+
+PARAMS="--runThreadN 32
+	--runMode genomeGenerate
+        --genomeDir $IDX_DIR/$NAME
+        --genomeFastaFiles $FASTA
+        --sjdbGTFfile $GTF
+        --sjdbOverhang 99
+        --genomeSAindexNbases 12"
+
+STAR $PARAMS
+```
 
 ### Fasta File
 
@@ -457,12 +646,15 @@ Chr1    Araport11       CDS     5439    5630    .       +       0       ID=AT1G0
 Chr1    Araport11       exon    5439    5899    .       +       .       ID=AT1G01010:exon:6;Parent=AT1G01010.1;Name=NAC001:exon:6
 Chr1    Araport11       three_prime_UTR 5631    5899    .       +       .       ID=AT1G01010:three_prime_UTR:1;Parent=AT1G01010.1;Name=NAC001:three_prime_UTR:1
 ```
-
 :::
 
 ## Workflow - STAR Alignment {.smaller}
 
-Now we can align the reads from each sample to the reference genome
+Now we can align the reads from each sample to the reference genome.
+
+::: {.panel-tabset}
+
+### Job submission
 
 ```sh
 while IFS=, read -r srr_id eco geno trt tiss biorep samplename fq1 fq2
@@ -471,7 +663,54 @@ do
 done < <(tail -n +2 raw/metadata.csv)
 ```
 
-Output
+### STAR-align.sh
+
+```sh
+#!/bin/bash
+#SBATCH --partition=batch
+#SBATCH --cpus-per-task=16
+#SBATCH --mem=100g
+#SBATCH --time=0-8:00:00
+#SBATCH --mail-type=ALL
+#SBATCH --job-name="STAR-align"
+#SBATCH --output=log/%x_%j.log
+##################################################################
+
+## Load STAR environment
+module load star
+
+## Setting variables
+SAMPLENAME=$1
+IN_DIR=analysis/trim_galore
+OUT_DIR=analysis/star
+IDX_DIR=index
+
+# Create analysis folder (if it doesn't exist)
+[ ! -d "$OUT_DIR" ] && mkdir -p "$OUT_DIR"
+
+## Setting STAR parameters
+
+PARAMS=" --runThreadN 16
+         --runMode alignReads
+         --genomeDir ${IDX_DIR}
+         --readFilesCommand zcat
+         --outSAMtype BAM SortedByCoordinate
+         --outFileNamePrefix ${OUT_DIR}/${SAMPLENAME}_
+         --outFilterMismatchNmax 0
+         --outFilterMultimapNmax 1
+         --quantMode GeneCounts
+         --outWigType wiggle"
+
+## Running STAR
+STAR $PARAMS --readFilesIn $IN_DIR/${SAMPLENAME}_val_1.fq.gz $IN_DIR/${SAMPLENAME}_val_2.fq.gz
+
+## Indexing bam files
+samtools index $OUT_DIR/${SAMPLENAME}_*bam
+```
+
+
+### Output
+
 ```sh
 wt_1_Aligned.sortedByCoord.out.bam
 wt_1_Aligned.sortedByCoord.out.bam.bai
@@ -485,13 +724,121 @@ wt_1_Signal.Unique.str1.out.wig
 wt_1_Signal.Unique.str2.out.wig
 wt_1_SJ.out.tab
 ```
+### Log file (Log.final.out)
+
+```sh
+                                 Started job on |       Oct 16 15:01:05
+                             Started mapping on |       Oct 16 15:01:06
+                                    Finished on |       Oct 16 15:14:11
+       Mapping speed, Million of reads per hour |       94.20
+
+                          Number of input reads |       20540486
+                      Average input read length |       297
+                                    UNIQUE READS:
+                   Uniquely mapped reads number |       19330715
+                        Uniquely mapped reads % |       94.11%
+                          Average mapped length |       291.75
+                       Number of splices: Total |       18632044
+            Number of splices: Annotated (sjdb) |       0
+                       Number of splices: GT/AG |       18418926
+                       Number of splices: GC/AG |       175340
+                       Number of splices: AT/AC |       8071
+               Number of splices: Non-canonical |       29707
+                      Mismatch rate per base, % |       0.00%
+                         Deletion rate per base |       0.00%
+                        Deletion average length |       1.51
+                        Insertion rate per base |       0.00%
+                       Insertion average length |       1.22
+                             MULTI-MAPPING READS:
+        Number of reads mapped to multiple loci |       0
+             % of reads mapped to multiple loci |       0.00%
+        Number of reads mapped to too many loci |       389809
+             % of reads mapped to too many loci |       1.90%
+                                  UNMAPPED READS:
+  Number of reads unmapped: too many mismatches |       0
+       % of reads unmapped: too many mismatches |       0.00%
+            Number of reads unmapped: too short |       819554
+                 % of reads unmapped: too short |       3.99%
+                Number of reads unmapped: other |       408
+                     % of reads unmapped: other |       0.00%
+                                  CHIMERIC READS:
+                       Number of chimeric reads |       0
+                            % of chimeric reads |       0.00%
+```
+:::
+
+## Anatomy of a SAM/BAM file {.smaller}
+
+Sequence alignment map (SAM) format official documentation is available [here](http://samtools.github.io/hts-specs/SAMv1.pdf). The SAM file consists of a header and rows for each read. Each row contains 11 mandatory fields. BAM is the binary compressed version of SAM.
+
+For decoding the SAM Flags, check out this [website](https://broadinstitute.github.io/picard/explain-flags.html) from the Broad Institute.
+
+```sh
+A00738:657:H72KHDSX7:1:2513:31566:1110  163     chr01   2960    255     150M    =       3065    254     CACCCACAGGCACCACCGTCCTTGTTGGTAATGAAGAAGACGAGACGACGACTTCCCCACTAGGAAACACGACGGAGGCGGAGATGATCGACGGCGGAGAGAGCTACAGAAACATCGATGCCTCCTGTCCAATCCCCCCATCCCATTCGG  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF:FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF  NH:i:1  HI:i:1  AS:i:297        nM:i:0
+A00738:657:H72KHDSX7:1:1330:26928:13870 99      chr01   2983    255     149M    =       3071    223     GTTGGTAATGAAGAAGACGAGACGACGACTTCCCCACTAGGAAACACGACGGAGGCGGAGATGATCGACGGCGGAGAGAGCTACAGAAACATCGATGCCTCCTGTCCAATCCCCCCATCCCATTCGGTAGTTGGATTGAAGACTACCGA   FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF:FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF:FFFF   NH:i:1  HI:i:1  AS:i:282        nM:i:0
+A00738:657:H72KHDSX7:1:1159:8594:10551  163     chr01   3001    255     150M    =       3069    218     GAGACGACGACTTCCCCACTAGGAAACACGACGGAGGCGGAGATGATCGACGGCGGAGAGAGCTACAGAAACATCGATGCCTCCTGTCCAATCCCCCCATCCCATTCGGTAGTTGGATTGAAGACTACCGAATAAGAGAAGCAGGCAGGC  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF:FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF  NH:i:1  HI:i:1  AS:i:298        nM:i:0
+A00738:657:H72KHDSX7:1:1640:6551:15311  163     chr01   3006    255     149M    =       3088    232     GACGACTTCCCCACTAGGAAACACGACGGAGGCGGAGATGATCGACGGCGGAGAGAGCTACAGAAACATCGATGCCTCCTGTCCAATCCCCCCATCCCATTCGGTAGTTGGATTGAAGACTACCGAATAAGAGAAGCAGGCAGGCAGAC   FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF   NH:i:1  HI:i:1  AS:i:297        nM:i:0
+A00738:657:H72KHDSX7:1:2574:25084:30937 99      chr01   3007    255     149M    =       3207    448     ACGACTTCCCCACTAGGAAACACGACGGAGGCGGAGATGATCGACGGCGGAGAGAGCTACAGAAACATCGATGCCTCCTGTCCAATCCCCCCATCCCATTCGGTAGTTGGATTGAAGACTACCGAATAAGAGAAGCAGGCAGGCAGACA   FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF:FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF,FFFFFFFFFFFFFFF:FF   NH:i:1  HI:i:1  AS:i:297        nM:i:0
+A00738:657:H72KHDSX7:1:1327:12717:27023 99      chr01   3008    255     149M    =       3086    227     CGACTTCCCCACTAGGAAACACGACGGAGGCGGAGATGATCGACGGCGGAGAGAGCTACAGAAACATCGATGCCTCCTGTCCAATCCCCCCATCCCATTCGGTAGTTGGATTGAAGACTACCGAATAAGAGAAGCAGGCAGGCAGACAA   FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF:FFFFFFFFFFFFFFFFFFFFFFFFFFFF:FFFFFFFFFFFFFFFF   NH:i:1  HI:i:1  AS:i:296        nM:i:0
+```
+
+<br>
+
+:::: {.columns}
+
+::: {.column width="40%"}
+
+```sh
+A00738:657:H72KHDSX7:1:1327:12717:27023
+99      
+chr01
+3008
+255
+149M
+= 
+3086
+227   
+CGACTTCCCCACTAGGAAACACGACGGAGGCGGAGATGATCGACGGCGGAGAGAGCTACAGAAACATCGATGCCTCCTGTCCAATCCCCCCATCCCATTCGGTAGTTGGATTGAAGACTACCGAATAAGAGAAGCAGGCAGGCAGACAA
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF:FFFFFFFFFFFFFFFFFFFFFFFFFFFF:FFFFFFFFFFFFFFFF
+NH:i:1  HI:i:1  AS:i:296  nM:i:0
+```
+:::
+
+::: {.column width="60%"}
+
+```sh
+Sequence identifier
+SAM FLAG
+Reference sequence name (chromosome/scaffold)
+1-based leftmost mapping position
+Mapping quality (MAPQ)
+CIGAR string
+Reference name of mate
+Position of mate
+Observed Template length
+Sequence
+Base quality
+Optional fields
+```
+:::
+
+::::
+
 
 ## Workflow - Convert BAM to BigWig (Optional) {.smaller}
 
-The BAM file produced from STAR contains alignment information that can be viewed in IGV. However, this file can be big and sluggish so one option is convert the **BAM** file to **BigWig** format that will allow fast visualization of the results. **Note**: the BigWig format will lose individual read information.
+The **BAM** file produced from `STAR` contains alignment information that can be viewed in IGV. However, this file can be big and sluggish so one option is to convert the **BAM** file to a smaller **BigWig** format that will allow fast visualization of the results. 
 
+::: {.callout-note}
+The **BigWig** format will aggregate and bin your data across the genome. Therefore, you will lose individual read information. For observing SNPs, you'll want to use the **BAM** files instead.
+:::
 
-Now we can align the reads from each sample to the reference genome
+<br>
+
+::: {.panel-tabset}
+
+### Job submission
+
 ```sh
 while IFS=, read -r srr_id eco geno trt tiss biorep samplename fq1 fq2
 do
@@ -499,7 +846,565 @@ do
 done < <(tail -n +2 raw/metadata.csv)
 ```
 
+### bamTobw.sh
 
+```sh
+#!/bin/bash
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=4
+#SBATCH --mem=100G
+#SBATCH --time=02:00:00
+#SBATCH --job-name="bam2bw"
+#SBATCH --output=log/%x_%j.log
+#SBATCH -p batch # This is the default partition, you can use any of the following; intel, batch, highmem, gpu
+
+# Shell script to generate BigWig files from STAR bam output
+# Since the dataset is non-stranded, we can convert directly from the BAM file
+
+# Load deeptools
+module load deeptools
+
+# Set variables
+SAMPLENAME=$1
+IN_DIR=analysis/star
+
+bamCoverage -b $IN_DIR/${SAMPLENAME}_Aligned.sortedByCoord.out.bam \
+    -o $IN_DIR/${SAMPLENAME}.bw \
+    -p 4 \
+    --normalizeUsing CPM \
+    --exactScaling \
+    --skipNAs
+```
+:::
 
 # Day Two
 
+## Workflow Outline {.smaller}
+
+-   Create metadata
+-   QC using `Fastqc` and `trim_galore`
+-   Genome indexing for `STAR` aligner
+-   Sequence alignment with `STAR`
+-   Gene quantification using `featureCounts`
+-   Differential expression analysis with `DESeq2`
+-   Data visualization in IGV
+
+## Workflow - featureCounts {.smaller}
+
+After aligning the reads to the genome, we must quantify total reads associated with each genome feature (e.g., gene).
+
+<br>
+
+::: {.panel-tabset}
+
+### Job Submission
+
+```sh
+sbatch code/featurecounts.sh
+```
+
+### featurecounts.sh
+
+```sh
+#!/bin/bash
+#SBATCH --partition=batch
+#SBATCH --cpus-per-task=2
+#SBATCH --mem=12g
+#SBATCH --time=0-4:00:00
+#SBATCH --mail-type=ALL
+#SBATCH --job-name="featurecount"
+#SBATCH --output=log/%x_%j.log
+
+##################################################################
+## Shell script to quantify read counts with FeatureCounts
+
+## Load modules
+module load subread # v2.0.3
+
+## Setting variables
+IN_DIR=analysis/star
+OUT_DIR=analysis/featurecounts
+STRAND=0 # (0-unstrand, 1-strand, 2-reverse strand)
+GTF=genome/Araport11_GFF3_genes_transposons.201606.gtf
+
+# Create analysis folder (if it doesn't exist)
+[ ! -d "$OUT_DIR" ] && mkdir -p "$OUT_DIR"
+
+## Set featuercounts params
+# -p : indicates paired-end reads
+# --countReadPairs : count read pairs instead of reads
+# --primary : count primary alignments only
+
+PARAMS="-T 2 \
+        -s $STRAND \
+        -a $GTF \
+        -p \
+        -t exon \
+        -g gene_id \
+        --countReadPairs \
+        --primary \
+        -o ${OUT_DIR}/featurecounts.txt"
+
+## Running featureCounts
+featureCounts ${PARAMS} $IN_DIR/*bam
+```
+
+### Output
+
+```sh
+ #Program:featureCounts v2.0.6; Command:"featureCounts" "-T" "2" "-s" "0" "-a" "genome/Araport11_GFF3_genes_transposons.201606.gtf" "-p" "-t" "exon" "-g" "gene_id" "--countReadPairs" "--primary" "-o" "analysis/featurecounts/featurecounts.txt" "analysis/star/mir163_1_Aligned.sortedByCoord.out.bam" "analysis/star/mir163_2_Aligned.sortedByCoord.out.bam" "analysis/star/mir163_3_Aligned.sortedByCoord.out.bam" "analysis/star/wt_1_Aligned.sortedByCoord.out.bam" "analysis/star/wt_2_Aligned.sortedByCoord.out.bam" "analysis/star/wt_3_Aligned.sortedByCoord.out.bam" 
+Geneid  Chr     Start   End     Strand  Length  analysis/star/mir163_1_Aligned.sortedByCoord.out.bam        analysis/star/mir163_2_Aligned.sortedByCoord.out.bam        analysis/star/mir163_3_Aligned.sortedByCoord.out.bam        analysis/star/wt_1_Aligned.sortedByCoord.out.bam    analysis/star/wt_2_Aligned.sortedByCoord.out.bam        analysis/star/wt_3_Aligned.sortedByCoord.out.bam
+AT1G01010       Chr1;Chr1;Chr1;Chr1;Chr1;Chr1   3631;3996;4486;4706;5174;5439       3913;4276;4605;5095;5326;5899   +;+;+;+;+;+     1688185     186     248     310     140     258
+AT1G01020       Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1     6788;6788;6788;6788;6788;6788;7157;7157;7157;7157;7157;7157;7384;7384;7384;7384;7564;7564;7564;7564;7564;7564;7762;7762;7762;7762;7762;7942;7942;7942;7942;7942;8236;8236;8236;8236;8236;8236;8417;8417;8417;8417;8571;8571;8571;8594;8594;8594 7069;7069;7069;7069;7069;7069;7232;7232;7232;7232;7450;7450;7450;7450;7450;7450;7649;7649;7649;7649;7649;7649;7835;7835;7835;7835;7835;7987;7987;7987;7987;7987;8464;8325;8464;8325;8325;8325;8464;8464;8464;8464;9130;9130;8737;9130;9130;8737     -;-;-;-;-;-;-;-;-;-;-;-;-;-;-;-;-;-;-;-;-;-;-;-;-;-;-;-;-;-;-;-;-;-;-;-;-;-;-;-;-;-;-;-;-;-;-;- 1571    294     265     413     458     293334
+AT1G03987       Chr1    11101   11372   +       272     23      15 17       29      16      20
+AT1G01030       Chr1;Chr1;Chr1;Chr1;Chr1        11649;11649;12424;13335;13335       12354;13173;13173;13714;13714   -;-;-;-;-       1905188     216     234     262     192     205
+AT1G01040       Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1     23121;23416;24542;24542;24752;24752;25041;25041;25524;25524;25825;25825;26081;26081;26292;26292;26543;26543;26862;26862;27099;27099;27372;27372;27618;27618;27803;27803;28708;28708;28890;28890;29160;29160;30147;30147;30410;30410;30902;30902     24451;24451;24655;24655;24962;24962;25435;25435;25743;25743;25997;25997;26203;26203;26452;26452;26776;26776;27012;27012;27281;27281;27536;27533;27713;27713;28431;28431;28805;28805;29080;29080;30065;30065;30311;30311;30816;30816;31120;31227 +;+;+;+;+;+;+;+;+;+;+;+;+;+;+;+;+;+;+;+;+;+;+;+;+;+;+;+;+;+;+;+;+;+;+;+;+;+;+;+     6279    1066    1034    14131462    864     1138
+AT1G03993       Chr1    23312   24099   -       788     0       0  00       0       0
+AT1G01050       Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1;Chr1   31170;31382;31521;31521;31693;31693;31933;31933;32088;32088;32282;32282;32431;32431;32547;32547;32839;33029     31424;31424;31602;31602;31813;31813;31998;31998;32195;32195;32347;32347;32459;32459;32670;32670;33009;33171 -;-;-;-;-;-;-;-;-;-;-;-;-;-;-;-;-;- 1165    999     1218    1258    1130    11611269
+AT1G03997       Chr1    32727   33009   +       283     0       0  00       0       0
+```
+
+:::
+
+## Workflow - Running DESeq2 {.smaller}
+
+`DESeq2` is an R package that allows differential expression analysis.
+
+
+::: {.panel-tabset}
+
+### Job submission
+
+```sh
+sbatch code/DESeq2.sh
+```
+
+### DESeq2.sh
+
+```sh
+#!/bin/bash
+#SBATCH --partition=batch
+#SBATCH --cpus-per-task=16
+#SBATCH --mem=100g
+#SBATCH --time=0-8:00:00
+#SBATCH --mail-type=ALL
+#SBATCH --job-name="deseq2"
+#SBATCH --output=log/%x_%j.log
+##################################################################
+
+####################
+# Executing Rscript
+# conda activate DEG-analysis
+# Rscript --vanilla DESeq2.R
+####################
+
+# Load conda environment
+source activate DEG-analysis
+
+# Run R script
+Rscript --vanilla code/DESeq2.R
+```
+
+### DESeq.R
+
+```r
+#!/usr/bin/env Rscript
+
+# Load libaries
+library(tidyverse)
+library(DESeq2)
+library(RColorBrewer)
+library(gplots)
+library(EnhancedVolcano)
+library(ggfortify)
+library(glue)
+library(plotly)
+
+# Load count matrix file from featurecounts and clean up the header
+counts <- read_tsv("analysis/featurecounts/featurecounts.txt",
+          col_names=TRUE, skip=1)
+
+new_name <- str_extract(names(counts)[endsWith(names(counts), "bam")],
+            "(?<=star/).*(?=_Aligned)")
+
+names(counts)[endsWith(names(counts), "bam")] <- new_name
+
+counts <- counts %>%
+  select(-Chr, -Start, -End, -Strand, -Length) %>%
+  column_to_rownames(var = "Geneid") %>%
+  as.matrix()
+
+# Load sample info and metadata
+
+sampleinfo <- read_csv("raw/metadata.csv", col_names=TRUE)
+
+sampleinfo <- sampleinfo %>%
+  mutate(genotype = factor(genotype, levels = c("wt", "miR163_mut"))) %>%
+  arrange(samplename) %>%
+  column_to_rownames(var = "samplename") %>%
+  as.matrix()
+
+write.table(as.data.frame(counts),
+  file = "analysis/featurecounts/count_matrix.csv",
+  sep = ",",
+  quote = FALSE,
+  row.names = F)
+
+# Load annotation file
+annot <- read_csv("genome/ath_gene_annot.csv", col_names=TRUE)
+
+# Construct DESeqDataSet
+dds <- DESeqDataSetFromMatrix(countData = counts,
+                              colData = sampleinfo,
+                              design = ~ genotype)
+
+# Reorder factor level
+dds$genotype<- relevel(dds$genotype, ref = "wt")
+
+# Pre-filter low counts
+keep <- rowSums(counts(dds)) >= 5
+dds <- dds[keep,]
+
+dds <- estimateSizeFactors(dds)
+
+normalized.counts <- as.data.frame(counts(dds, normalized=TRUE)) %>%
+  as_tibble(rownames = "locus") %>%
+  left_join(., annot, c('locus'='tair_locus'))
+
+# write to file
+write.table(normalized.counts,"analysis/deseq2/genelists/DESeq2_normalizedcounts.txt", 
+            sep = "\t", 
+            quote = FALSE,
+            row.names = FALSE)
+
+############## Pre-Processing Quality Assessment (START) ##############
+
+## Library sizes bar plot
+
+librarySizes <- colSums(counts)
+
+pdf("analysis/deseq2/plots/lib-size.barplots.pdf", width = 7, height = 7)
+barplot(librarySizes,
+        names=names(librarySizes),
+        las=2,
+        main="Barplot of library sizes")
+abline(h=20e6, lty=2)
+dev.off()
+
+png("analysis/deseq2/plots/lib-size.barplots.png")
+barplot(librarySizes,
+        names=names(librarySizes),
+        las=2,
+        main="Barplot of library sizes")
+abline(h=20e6, lty=2)
+dev.off()
+
+## Count distribution Boxplots
+
+logcounts <- log2(counts + 1) # no normalization
+title_boxplot <- paste("Count Distribution Boxplots")
+
+pdf("analysis/deseq2/plots/count-dist.boxplots.raw.pdf", width = 7, height = 7)
+boxplot(logcounts,
+        main=title_boxplot,
+        xlab="",
+        ylab="Log2(Counts+1)",
+        las=2,
+        col=c(rep("red",3), rep("blue",3)))
+abline(h=median(as.matrix(logcounts)), col="blue")
+dev.off()
+
+png("analysis/deseq2/plots/count-dist.boxplots.raw.png")
+boxplot(logcounts,
+        main=title_boxplot,
+        xlab="",
+        ylab="Log2(Counts+1)",
+        las=2,
+        col=c(rep("red",3),rep("blue",3)))
+abline(h=median(as.matrix(logcounts)), col="blue")
+dev.off()
+
+rlogcounts <- rlog(counts) #normalization
+title_boxplot_rlog <- paste("Count Distribution Boxplots (rlog)")
+
+pdf("analysis/deseq2/plots/count-dist.boxplots.rlog.pdf", width = 7, height = 7)
+boxplot(rlogcounts,
+        main=title_boxplot_rlog,
+        xlab="",
+        ylab="rlog(Counts)",
+        las=2,
+        col=c(rep("red",3),rep("blue",3)))
+dev.off()
+
+png("analysis/deseq2/plots/count-dist.boxplots.rlog.png")
+boxplot(rlogcounts,
+        main=title_boxplot_rlog,
+        xlab="",
+        ylab="rlog(Counts)",
+        las=2,
+        col=c(rep("red",3),rep("blue",3)))
+dev.off()
+
+
+## Correlation heatmaps
+
+colors <- colorRampPalette( rev(brewer.pal(9, "Blues")) )(255)
+rld <- rlog(dds, blind=TRUE)
+corr_samps <- cor(as.matrix(assay(rld)))
+
+pdf("analysis/deseq2/plots/cor-heatmap.pdf", width = 7, height = 7)
+heatmap.2(corr_samps,
+          trace = "none",
+          col = colors,
+          main = "Sample correlations")
+dev.off()
+
+png("analysis/deseq2/plots/cor-heatmap.png")
+heatmap.2(corr_samps,
+          trace = "none",
+          col = colors,
+          main = "Sample correlations")
+dev.off()
+
+## Principal Component Analysis
+
+# autoplot requires the ggfortify library
+
+pcDat <- prcomp(t(rlogcounts))
+title_pca <- paste("PC1 vs PC2, All Samples")
+
+pdf("analysis/deseq2/plots/PCA.pdf", width = 7, height = 7)
+autoplot(pcDat,
+         main=title_pca,
+         data = sampleinfo,
+         colour="genotype",
+         shape=FALSE)
+dev.off()
+
+png("analysis/deseq2/plots/PCA.png")
+autoplot(pcDat,
+         main=title_pca,
+         data = sampleinfo,
+         colour="genotype",
+         shape=FALSE)
+dev.off()
+
+## Plotly version of PCA plot
+p <- autoplot(pcDat,
+         main=title_pca,
+         data = sampleinfo,
+         colour = "genotype",
+         label = F,
+         label.repel = F,
+         size = 8,
+         group = "time",
+         shape = "time")
+
+plt <- plotly::ggplotly(p)
+htmlwidgets::saveWidget(plt, "analysis/deseq2/plots/PCA.html")
+
+############## Pre-Processing Quality Assessment (END) ##############
+
+
+############## Differential Expression (START)##############
+
+# Calculate DE for all contrasts
+dds <- DESeq(dds)
+
+# Extract different contrast (i.e., comparisons)
+contrast_list <- resultsNames(dds)
+contrast_list <- contrast_list[contrast_list != "Intercept"] # remove Intercept
+
+
+
+
+# Function to extract info for each contrast
+
+deseq2_deg <- function(contrast_name){
+  # extracting DEG results
+  res <- results(dds, name=contrast_name)
+  res05 <- results(dds, name=contrast_name, lfcThreshold = 1, alpha = 0.05)
+  res05$padj <- p.adjust(res05$pvalue, method="BH")
+  res05 <- res05[!is.na(res05$padj),]
+
+  res_filt <- res[ which(res$padj < 0.1), ] # total DEGs
+  res05_filt <- res05[ which(res05$padj < 0.05), ] # total DEGs
+  up <- subset(res_filt, log2FoldChange > 0) # upDEGs (LFC > 0, p<0.1)
+  dn <- subset(res_filt, log2FoldChange < 0) # dnDEGs (LFC < 0, p<0.1)
+  up_05 <- subset(res05_filt, log2FoldChange > 1) # upDEGs (LFC > 1, p<0.05)
+  dn_05 <- subset(res05_filt, log2FoldChange < -1) # dnDEGs (LFC< -1, p<0.05)
+
+  # generates summary file
+  summary_file <- c(contrast_name,
+                    nrow(res_filt),
+                    nrow(up),
+                    nrow(dn),
+                    nrow(res05_filt),
+                    nrow(up_05),
+                    nrow(dn_05))
+
+  # export lists
+  degs <- subset(res, padj < 0.1) %>%
+          as_tibble(rownames = "locus") %>%
+          left_join(., annot, c('locus'='tair_locus'))
+
+  degs_05 <- subset(res05, padj < 0.05, log2FoldChange > 1) %>%
+             as_tibble(rownames = "locus") %>%
+             left_join(., annot, c('locus'='tair_locus'))
+
+  write.table(degs,
+              file = paste0("analysis/deseq2/genelists/",contrast_name,"_DEGs.LFC0_p1.txt"),
+              quote = FALSE,
+              sep= "\t",
+              row.names = FALSE)
+  write.table(degs_05,
+              file = paste0("analysis/deseq2/genelists/",contrast_name,"_DEGs.LFC1_p05.txt"),
+              quote = FALSE,
+              sep= "\t",
+              row.names = FALSE)
+
+  # post-processing plots
+
+  # volcano plots with EnhancedVolcano
+
+  subtitle1 <- paste("LFC > 0, FDR < 0.1")
+  subtitle2 <- paste("LFC > 1, FDR < 0.05")
+
+  EnhancedVolcano(res,
+      lab = rownames(res),
+      x = 'log2FoldChange',
+      y = 'pvalue',
+      title = contrast_name,
+      subtitle = subtitle1,
+      pCutoff = 0.1,
+      pCutoffCol = 'padj', # p-value
+      FCcutoff = 0,
+      pointSize = 4.0,
+      labSize = 6.0,
+      drawConnectors = TRUE,
+      widthConnectors = 0.75)
+
+  ggsave(paste0("analysis/deseq2/plots/",contrast_name,"-volcano-LFC0-FDR1.pdf"), width = 7, height = 7)
+  ggsave(paste0("analysis/deseq2/plots/",contrast_name,"-volcano-LFC0-FDR1.png"), scale = 2)
+
+  EnhancedVolcano(res05,
+      lab = rownames(res05),
+      x = 'log2FoldChange',
+      y = 'pvalue',
+      title = contrast_name,
+      subtitle = subtitle2,
+      pCutoff = 0.05,
+      pCutoffCol = 'padj', # p-value
+      FCcutoff = 1,
+      pointSize = 4.0,
+      labSize = 6.0,
+      drawConnectors = TRUE,
+      widthConnectors = 0.75)
+
+  ggsave(paste0("analysis/deseq2/plots/",contrast_name,"-volcano-LFC1-FDR05.pdf"), width = 7, height = 7)
+  ggsave(paste0("analysis/deseq2/plots/",contrast_name,"-volcano-LFC1-FDR05.png"), scale = 2)
+
+  return(summary_file)
+}
+
+# Run function for all contrast
+sum_file <- sapply(contrast_list, deseq2_deg)
+
+sum_file_tbl <- sum_file %>%
+  t() %>%
+  as_tibble() %>%
+  filter(V1 != "Intercept") %>%
+  select("Comparison"=V1,
+         "Total DEGs (p < 0.1)"=V2,
+         "Up DEGs (p < 0.1, LFC > 0)"=V3,
+         "Down DEGs (p < 0.1, LFC < 0)"=V4,
+         "Total DEGs (p < 0.05)"=V5,
+         "Up DEGs (p < 0.05, LFC > 1)"=V6,
+         "Down DEGs (p < 0.05, LFC < -1)"=V7) %>%
+  mutate(across(2:7, as.integer))
+
+write.table(sum_file_tbl,
+            file = "analysis/deseq2/genelists/DESeq2.DEG_summary.txt",
+            sep = "\t",
+            row.names = FALSE,
+            quote = FALSE)
+
+```
+:::
+
+## Workflow - DESeq2 (pre-processing) {.smaller}
+
+The custom `DESeq2` script generates several plots, tables, and genelists organized into the following directories. 
+
+<br>
+
+```sh
+analysis/deseq2
+├── genelists
+└── plots
+```
+
+<br>
+
+::: {.panel-tabset}
+
+### Library size {.smaller}
+
+![](../analysis/deseq2/plots/lib-size.barplots.png)
+
+### Count distribution
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+![](../analysis/deseq2/plots/count-dist.boxplots.raw.png)
+
+:::
+
+::: {.column width="50%"}
+![](../analysis/deseq2/plots/count-dist.boxplots.rlog.png)
+:::
+
+::::
+
+### Correlation heatmap
+
+![](../analysis/deseq2/plots/cor-heatmap.png){width="70%"}
+
+### PCA
+
+![](../analysis/deseq2/plots/PCA.png){width="70%"}
+
+:::
+
+## Workflow - DESeq2 (DEG) {.smaller}
+
+```sh
+$ls analysis/deseq2/genelists
+DESeq2.DEG_summary.txt
+DESeq2_normalizedcounts.txt
+genotype_miR163_mut_vs_wt_DEGs.LFC0_p1.txt
+genotype_miR163_mut_vs_wt_DEGs.LFC1_p05.txt
+```
+
+::: {.panel-tabset}
+
+### Summary table
+
+```sh
+$ cat analysis/deseq2/genelists/DESeq2.DEG_summary.txt
+Comparison      Total DEGs (p < 0.1)    Up DEGs (p < 0.1, LFC > 0)      Down DEGs (p < 0.1, LFC < 0)    Total DEGs (p < 0.05)   Up DEGs (p < 0.05, LFC > 1)     Down DEGs (p < 0.05, LFC < -1)
+genotype_miR163_mut_vs_wt       11      6       5    5       3       2
+```
+
+### Volcano plot (p < 0.1, l2fc > 0)
+
+![](../analysis/deseq2/plots/genotype_miR163_mut_vs_wt-volcano-LFC0-FDR1.png){width="70%"}
+
+### Volcano plot (p < 0.05, l2fc > 1)
+
+![](../analysis/deseq2/plots/genotype_miR163_mut_vs_wt-volcano-LFC1-FDR05.png){width="70%"}
+
+:::

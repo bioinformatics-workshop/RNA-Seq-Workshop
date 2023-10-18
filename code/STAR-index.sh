@@ -7,7 +7,7 @@
 #SBATCH --output=log/%x_%j.log
 
 ## Load environment
-source activate star # STAR v2.7.10
+module load star
 
 NAME=ara11
 FASTA=genome/genome/TAIR10_Chr.all.fasta
