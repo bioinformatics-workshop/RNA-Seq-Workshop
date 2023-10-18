@@ -1408,3 +1408,49 @@ genotype_miR163_mut_vs_wt       11      6       5    5       3       2
 ![](../analysis/deseq2/plots/genotype_miR163_mut_vs_wt-volcano-LFC1-FDR05.png){width="70%"}
 
 :::
+
+## Workflow - MultiQC {.smaller}
+
+`MultiQC` is used to generate a summary of the raw and processed data. The results are provided in an HTML file.
+
+::: {.panel-tabset}
+
+### Job submission
+
+```sh
+sbatch code/multiqc.sh
+```
+
+### multiqc.sh
+
+```sh
+#!/bin/bash
+#SBATCH --partition=batch
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=12g
+#SBATCH --time=0-4:00:00
+#SBATCH --mail-type=ALL
+#SBATCH --job-name="multiqc"
+#SBATCH --output=log/%x_%j.log
+
+##################################################################
+## Shell script to generate MultiQC summary
+
+## Load environment
+source activate DEG-analysis
+
+## Setting variables
+OUT_DIR=analysis/multiqc
+
+# Create analysis folder (if it doesn't exist)
+[ ! -d "$OUT_DIR" ] && mkdir -p "$OUT_DIR"
+
+# Run multiqc
+multiqc --force \
+    --dirs \
+    --outdir ${OUT_DIR} \
+    --filename multiqc \
+    analysis
+```
+
+:::

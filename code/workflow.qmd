@@ -15,9 +15,7 @@ code-fold: true
 embed-resources: true
 toc: true
 page-layout: full
-css: styles.css
 number-sections: true
-bibliography: references.bib
 link-external-newwindow: true
 ---
 
@@ -54,7 +52,7 @@ Rscript --vanilla code/metadata.R
 
 ## Data Download
 
-Data were dobwloaded from the NCBI SRA server to the HPCC cluster
+Data were downloaded from the NCBI SRA server to the HPCC cluster
 
 ```sh
 while IFS=, read -r srr_id eco geno trt tiss biorep samplename fq1 fq2
