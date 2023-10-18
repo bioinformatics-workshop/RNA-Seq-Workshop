@@ -20,9 +20,9 @@ title-slide-attributes:
     data-background-size: 70%
     data-background-opacity: "1"
     data-background-position: "top"
-chalkboard: true
+chalkboard: false
 link-external-newwindow: true
-embed-resources: false
+embed-resources: true
 ---
 
 # About the Core
