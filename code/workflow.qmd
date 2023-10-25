@@ -1,5 +1,5 @@
 ---
-title: "RNA-seq Analysis Workflow"
+title: "RNA-seq Analysis Workflow - Cheatsheet"
 subtitle: "RNA-seq Workshop demo"
 format: html
 editor: visual
@@ -9,7 +9,7 @@ title-block-categories: true
 author: Brandon Le
 affiliation: Bioinformatics Core, Institute of Integrative Genome Biology
 date: 10-18-2023
-date-modified: 10-18-2023
+date-modified: 10-23-2023
 date-format: "MM-DD-YYYY"
 code-fold: true
 embed-resources: true

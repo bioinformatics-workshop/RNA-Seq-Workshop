@@ -7,7 +7,7 @@
 #SBATCH --time=06:00:00     # 6 hours
 #SBATCH --job-name="trim_galore"
 #SBATCH --output=log/%x_%j.log
-#SBATCH -p batch # This is the default partition, you can use any of the following; intel, batch, highmem, gpu
+#SBATCH -p epyc # This is the default partition, you can use any of the following; intel, batch, highmem, gpu
 
 ################### Trim_galore.sh ###################
 

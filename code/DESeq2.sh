@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --partition=batch
+#SBATCH --partition=epyc
 #SBATCH --cpus-per-task=16
 #SBATCH --mem=100g
 #SBATCH --time=0-8:00:00

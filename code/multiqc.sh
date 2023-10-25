@@ -1,8 +1,8 @@
 #!/bin/bash
-#SBATCH --partition=batch
+#SBATCH --partition=short
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=12g
-#SBATCH --time=0-4:00:00
+#SBATCH --time=0-2:00:00
 #SBATCH --mail-type=ALL
 #SBATCH --job-name="multiqc"
 #SBATCH --output=log/%x_%j.log

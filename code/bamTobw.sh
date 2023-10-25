@@ -6,7 +6,7 @@
 #SBATCH --time=02:00:00
 #SBATCH --job-name="bam2bw"
 #SBATCH --output=log/%x_%j.log
-#SBATCH -p batch # This is the default partition, you can use any of the following; intel, batch, highmem, gpu
+#SBATCH -p epyc # This is the default partition, you can use any of the following; intel, batch, highmem, gpu
 
 # Shell script to generate BigWig files from STAR bam output
 # Since the dataset is non-stranded, we can convert directly from the BAM file

@@ -7,7 +7,7 @@
 #SBATCH --time=04:00:00     # 4 hours
 #SBATCH --job-name="fastqc"
 #SBATCH --output=log/%x_%j.log
-#SBATCH -p batch # This is the default partition, you can use any of the following; intel, batch, highmem, gpu
+#SBATCH -p epyc # This is the default partition, you can use any of the following; epyc, short, intel, batch, highmem, gpu
 
 module load fastqc
 
