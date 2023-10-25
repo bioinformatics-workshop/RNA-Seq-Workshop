@@ -69,7 +69,7 @@ QC was performed using `fastqc` and `trim_galore` initiated through two shell sc
 while IFS=, read -r srr_id eco geno trt tiss biorep samplename fq1 fq2
 do
   sbatch code/fastqc.sh ${srr_id}
-#  sbatch code/trim_galore.sh $samplename $fq1 $fq2
+  sbatch code/trim_galore.sh $samplename $fq1 $fq2
 done < <(tail -n +2 raw/metadata.csv)
 ```
 

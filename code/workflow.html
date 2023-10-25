@@ -2683,7 +2683,7 @@ vertical-align: -.125em;
 <div class="sourceCode" id="cb4"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="va">IFS</span><span class="op">=</span>, <span class="bu">read</span> <span class="at">-r</span> <span class="va">srr_id</span> <span class="va">eco</span> <span class="va">geno</span> <span class="va">trt</span> <span class="va">tiss</span> <span class="va">biorep</span> <span class="va">samplename</span> <span class="va">fq1</span> <span class="va">fq2</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="cf">do</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">sbatch</span> code/fastqc.sh <span class="va">${srr_id}</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#  sbatch code/trim_galore.sh $samplename $fq1 $fq2</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="ex">sbatch</span> code/trim_galore.sh <span class="va">$samplename</span> <span class="va">$fq1</span> <span class="va">$fq2</span></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span> <span class="op">&lt;</span> <span class="op">&lt;(</span><span class="fu">tail</span> <span class="at">-n</span> +2 raw/metadata.csv<span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="genome-download" class="level2" data-number="5">
