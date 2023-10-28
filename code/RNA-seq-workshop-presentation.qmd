@@ -223,11 +223,36 @@ The home directory structure for the workshop should look like this:
 
 Cloning the repository will give you the most up-to-date files. To get the latest updates of the repository later on, you don't need to clone again. Instead, you can  `pull` the updates from GitHub to your server/computer. Make sure you are in the home directory of the workshop before running the command.
 
+
 ```sh
 git pull
 ```
 :::
 
+
+:::{.callout-caution}
+The `pull` command will overwrite any changes you've made locally. If you want to keep the changes and update the new things, you can run:
+
+```sh
+git stash
+git pull
+git stash apply
+```
+
+- `git stash`: This command stashes your local changes, creating a temporary backup.
+- `git pull`: This command fetches the changes from the remote repository and merges them into the local branch.
+- `git stash apply`: This command applies the stashed changes back to the working directory.
+
+Alternatively, if you want a complete reset of your local directory with the updates from GitHub, you can run:
+
+```sh
+git reset --hard HEAD && git clean -f -d && git pull  
+```
+
+- `git reset --hard HEAD`: This command resets the current branch to the HEAD commit of the remote repository, discarding any local changes.
+- `git clean -f -d`: This command removes any untracked files and directories from the working directory.
+- `git pull`: This command fetches the changes from the remote repository and merges them into the local branch.
+:::
 
 
 ## Create conda environment {.smaller}
