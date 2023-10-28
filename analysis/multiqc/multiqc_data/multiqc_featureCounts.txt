@@ -1,7 +1,0 @@
-Sample	Unassigned_Read_Type	Unassigned_Secondary	percent_assigned	Total	Unassigned_Chimera	Unassigned_Overlapping_Length	Unassigned_NonSplit	Unassigned_Singleton	Unassigned_Duplicate	Unassigned_Unmapped	Assigned	Unassigned_MultiMapping	Unassigned_NoFeatures	Unassigned_Ambiguity	Unassigned_FragmentLength	Unassigned_MappingQuality
-analysis | featurecounts | mir163_1	0	0	95.90506146972406	17832844	0	0	0	0	0	0	17102600	0	137671	592573	0	0
-analysis | featurecounts | mir163_2	0	0	95.73791647619345	21359084	0	0	0	0	0	0	20448742	0	148374	761968	0	0
-analysis | featurecounts | mir163_3	0	0	95.93910358578478	21577034	0	0	0	0	0	0	20700813	0	160084	716137	0	0
-analysis | featurecounts | wt_1	0	0	95.87493271718091	19330715	0	0	0	0	0	0	18533310	0	176052	621353	0	0
-analysis | featurecounts | wt_2	0	0	95.74069985264734	19932453	0	0	0	0	0	0	19083470	0	139130	709853	0	0
-analysis | featurecounts | wt_3	0	0	95.98594574520341	18983575	0	0	0	0	0	0	18221564	0	136837	625174	0	0

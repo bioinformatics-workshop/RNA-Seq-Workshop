@@ -12,6 +12,7 @@ format:
     theme: simple
     scrollable: true
     smaller: false
+    output-file: RNA-seq-presentation-revealjs.html
 editor: visual
 slide-number: true
 title-slide-attributes:
@@ -19,9 +20,9 @@ title-slide-attributes:
     data-background-size: 70%
     data-background-opacity: "1"
     data-background-position: "top"
-chalkboard: false
 link-external-newwindow: true
 embed-resources: true
+standalone: true
 ---
 
 # About the Core
@@ -128,11 +129,17 @@ Reference: [Van den Berge et. al (2019) Annu Rev Biomed Data Sci](https://www.an
 
 You should receive an email with login information if you've never had an account on the HPCC. For those with an account already, you can use the same credentials to log into the server.
 
-Open up your terminal program (on your Mac or PC) and at the `$` prompt, enter the following command (change 'USERNAME' to your account name)
+Open up your terminal program (on your Mac or PC) and at the `$` prompt, enter the following command (change `<USERNAME>` to your account name)
 
+::: {.callout-note}
+On the MacOS, there's a built-in terminal program `Terminal` (you can see it in your Applications folder within the Utilities sub-folder). For WinOS, you can download and install the `MobaXterm` application [(link)](https://mobaxterm.mobatek.net).
+:::
 <br>
 ```sh
 ssh <USERNAME>@cluster.hpcc.ucr.edu
+
+# example
+ssh bioinfo-workshop@cluster.hpcc.ucr.edu
 ```
 
 If connecting for the first time, you'll see a prompt (type yes and press ENTER):
@@ -145,9 +152,7 @@ Are you sure you want to continue connecting (yes/no)?
 
 Then you'll be ask for authentication password and two-factor validation with DUO.
 
-::: {.callout-note}
-On the MacOS, there's a built-in terminal program `Terminal` (you can see it in your Applications folder within the Utilities sub-folder). For WinOS, you can download and install the `MobaXterm` application [(link)](https://mobaxterm.mobatek.net).
-:::
+
 
 
 <br>
@@ -167,12 +172,14 @@ cd bioinformatics-workshops
 
 There will be times where you would want to see plots or access files generated on the cluster. For easier access, you can use an SFTP program with a GUI that connects to the server and provides direct access to those files.  
 
+<br>
 There are several free GUI applications including [Filezilla](https://filezilla-project.org), [Cyberduck](https://cyberduck.io), [WinSCP](https://winscp.net/eng/download.php).
 
 These applications are available for MacOS, WinOS, and Linux platforms.
 
 Once you have the application installed, start up the program and follow the instructions to connect to a site.
 
+<br>
 [Click here](https://hpcc.ucr.edu/manuals/hpc_cluster/sharing/#authentication-with-passwordduo) for instructions to connect and authenticate to the cluster using `Filezilla` with password + DUO authentication.
 
 ## Setting up the analysis directory {.smaller}
@@ -538,7 +545,7 @@ while IFS=, read -r srr_id eco geno trt tiss biorep samplename fq1 fq2
 do
   sbatch code/fastqc.sh ${srr_id}
   sbatch code/trim_galore.sh $samplename $fq1 $fq2
-done < <(tail -n +2 raw/metadata.csv)
+done < <(tail -n +2 raw/metadata_sub1M.csv)
 ```
 
 ### Fastqc Output
@@ -549,30 +556,30 @@ done < <(tail -n +2 raw/metadata.csv)
 
 ```sh
 $ ls analysis/fastqc
-SRR24016000_1_fastqc.html
-SRR24016000_1_fastqc.zip
-SRR24016000_2_fastqc.html
-SRR24016000_2_fastqc.zip
-SRR24016001_1_fastqc.html
-SRR24016001_1_fastqc.zip
-SRR24016001_2_fastqc.html
-SRR24016001_2_fastqc.zip
-SRR24016002_1_fastqc.html
-SRR24016002_1_fastqc.zip
-SRR24016002_2_fastqc.html
-SRR24016002_2_fastqc.zip
-SRR24016003_1_fastqc.html
-SRR24016003_1_fastqc.zip
-SRR24016003_2_fastqc.html
-SRR24016003_2_fastqc.zip
-SRR24016004_1_fastqc.html
-SRR24016004_1_fastqc.zip
-SRR24016004_2_fastqc.html
-SRR24016004_2_fastqc.zip
-SRR24016005_1_fastqc.html
-SRR24016005_1_fastqc.zip
-SRR24016005_2_fastqc.html
-SRR24016005_2_fastqc.zip
+SRR24016000_sub1M_1_fastqc.html
+SRR24016000_sub1M_1_fastqc.zip
+SRR24016000_sub1M_2_fastqc.html
+SRR24016000_sub1M_2_fastqc.zip
+SRR24016001_sub1M_1_fastqc.html
+SRR24016001_sub1M_1_fastqc.zip
+SRR24016001_sub1M_2_fastqc.html
+SRR24016001_sub1M_2_fastqc.zip
+SRR24016002_sub1M_1_fastqc.html
+SRR24016002_sub1M_1_fastqc.zip
+SRR24016002_sub1M_2_fastqc.html
+SRR24016002_sub1M_2_fastqc.zip
+SRR24016003_sub1M_1_fastqc.html
+SRR24016003_sub1M_1_fastqc.zip
+SRR24016003_sub1M_2_fastqc.html
+SRR24016003_sub1M_2_fastqc.zip
+SRR24016004_sub1M_1_fastqc.html
+SRR24016004_sub1M_1_fastqc.zip
+SRR24016004_sub1M_2_fastqc.html
+SRR24016004_sub1M_2_fastqc.zip
+SRR24016005_sub1M_1_fastqc.html
+SRR24016005_sub1M_1_fastqc.zip
+SRR24016005_sub1M_2_fastqc.html
+SRR24016005_sub1M_2_fastqc.zip
 ```
 
 ### Trim_galore Output
@@ -599,18 +606,18 @@ mir163_3_val_1.fq.gz
 mir163_3_val_2_fastqc.html
 mir163_3_val_2_fastqc.zip
 mir163_3_val_2.fq.gz
-SRR24016000_1.fastq.gz_trimming_report.txt
-SRR24016000_2.fastq.gz_trimming_report.txt
-SRR24016001_1.fastq.gz_trimming_report.txt
-SRR24016001_2.fastq.gz_trimming_report.txt
-SRR24016002_1.fastq.gz_trimming_report.txt
-SRR24016002_2.fastq.gz_trimming_report.txt
-SRR24016003_1.fastq.gz_trimming_report.txt
-SRR24016003_2.fastq.gz_trimming_report.txt
-SRR24016004_1.fastq.gz_trimming_report.txt
-SRR24016004_2.fastq.gz_trimming_report.txt
-SRR24016005_1.fastq.gz_trimming_report.txt
-SRR24016005_2.fastq.gz_trimming_report.txt
+SRR24016000_sub1M_1.fastq.gz_trimming_report.txt
+SRR24016000_sub1M_2.fastq.gz_trimming_report.txt
+SRR24016001_sub1M_1.fastq.gz_trimming_report.txt
+SRR24016001_sub1M_2.fastq.gz_trimming_report.txt
+SRR24016002_sub1M_1.fastq.gz_trimming_report.txt
+SRR24016002_sub1M_2.fastq.gz_trimming_report.txt
+SRR24016003_sub1M_1.fastq.gz_trimming_report.txt
+SRR24016003_sub1M_2.fastq.gz_trimming_report.txt
+SRR24016004_sub1M_1.fastq.gz_trimming_report.txt
+SRR24016004_sub1M_2.fastq.gz_trimming_report.txt
+SRR24016005_sub1M_1.fastq.gz_trimming_report.txt
+SRR24016005_sub1M_2.fastq.gz_trimming_report.txt
 wt_1_val_1_fastqc.html
 wt_1_val_1_fastqc.zip
 wt_1_val_1.fq.gz
@@ -732,7 +739,7 @@ Depending on the sequencing depth, this step can take a
 while IFS=, read -r srr_id eco geno trt tiss biorep samplename fq1 fq2
 do
   sbatch code/STAR-align.sh $samplename
-done < <(tail -n +2 raw/metadata.csv)
+done < <(tail -n +2 raw/metadata_sub1M.csv)
 ```
 
 
@@ -756,39 +763,39 @@ wt_1_SJ.out.tab
 
 ```{.sh eval=false code-line-numbers="|7-8|10-11"}
 $ less analysis/star/wt_1_Log.final.out
-                                 Started job on |       Oct 16 15:01:05
-                             Started mapping on |       Oct 16 15:01:06
-                                    Finished on |       Oct 16 15:14:11
-       Mapping speed, Million of reads per hour |       94.20
+                                 Started job on |       Oct 27 15:12:05
+                             Started mapping on |       Oct 27 15:12:05
+                                    Finished on |       Oct 27 15:13:29
+       Mapping speed, Million of reads per hour |       42.77
 
-                          Number of input reads |       20540486
+                          Number of input reads |       997854
                       Average input read length |       297
                                     UNIQUE READS:
-                   Uniquely mapped reads number |       19330715
-                        Uniquely mapped reads % |       94.11%
-                          Average mapped length |       291.75
-                       Number of splices: Total |       18632044
+                   Uniquely mapped reads number |       939014
+                        Uniquely mapped reads % |       94.10%
+                          Average mapped length |       291.73
+                       Number of splices: Total |       904715
             Number of splices: Annotated (sjdb) |       0
-                       Number of splices: GT/AG |       18418926
-                       Number of splices: GC/AG |       175340
-                       Number of splices: AT/AC |       8071
-               Number of splices: Non-canonical |       29707
+                       Number of splices: GT/AG |       894390
+                       Number of splices: GC/AG |       8458
+                       Number of splices: AT/AC |       419
+               Number of splices: Non-canonical |       1448
                       Mismatch rate per base, % |       0.00%
                          Deletion rate per base |       0.00%
-                        Deletion average length |       1.51
+                        Deletion average length |       1.50
                         Insertion rate per base |       0.00%
-                       Insertion average length |       1.22
+                       Insertion average length |       1.21
                              MULTI-MAPPING READS:
         Number of reads mapped to multiple loci |       0
              % of reads mapped to multiple loci |       0.00%
-        Number of reads mapped to too many loci |       389809
+        Number of reads mapped to too many loci |       18952
              % of reads mapped to too many loci |       1.90%
                                   UNMAPPED READS:
   Number of reads unmapped: too many mismatches |       0
        % of reads unmapped: too many mismatches |       0.00%
-            Number of reads unmapped: too short |       819554
-                 % of reads unmapped: too short |       3.99%
-                Number of reads unmapped: other |       408
+            Number of reads unmapped: too short |       39869
+                 % of reads unmapped: too short |       4.00%
+                Number of reads unmapped: other |       19
                      % of reads unmapped: other |       0.00%
                                   CHIMERIC READS:
                        Number of chimeric reads |       0
@@ -889,7 +896,7 @@ The **BigWig** format will aggregate and bin your data across the genome. Theref
 while IFS=, read -r srr_id eco geno trt tiss biorep samplename fq1 fq2
 do
   sbatch code/bamTobw.sh $samplename
-done < <(tail -n +2 raw/metadata.csv)
+done < <(tail -n +2 raw/metadata_sub1M.csv)
 ```
 :::
 
@@ -1098,8 +1105,7 @@ There is a cheatsheet containing the entire workflow with codes for job submissi
 
 You can follow this cheatsheet to run the workflow.
 
-[Cheatsheet](../code/workflow.html)
-
+[Cheatsheet](http://htmlpreview.github.io/?https://github.com/bioinformatics-workshop/RNA-Seq-Workshop/blob/main/code/workflow.html)
 
 ## Feedback {.smaller}
 

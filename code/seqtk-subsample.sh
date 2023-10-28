@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -l 
 #SBATCH --partition=epyc
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=4g

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -l
 #SBATCH --partition=epyc
 #SBATCH --cpus-per-task=16
 #SBATCH --mem=100g
@@ -10,6 +10,7 @@
 
 ## Load STAR environment
 module load star
+module load samtools
 
 ## Setting variables
 SAMPLENAME=$1

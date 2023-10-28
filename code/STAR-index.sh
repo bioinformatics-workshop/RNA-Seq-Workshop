@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -l
 #SBATCH --partition=epyc
 #SBATCH --cpus-per-task=32
 #SBATCH --mem=100g
@@ -9,15 +9,14 @@
 ## Load environment
 module load star
 
-NAME=ara11
-FASTA=genome/genome/TAIR10_Chr.all.fasta
+FASTA=genome/TAIR10_Chr.all.fasta
 GTF=genome/Araport11_GFF3_genes_transposons.201606.gtf
-GFF=genome/genome/Araport11_GFF3_genes_transposons.201606.gff
+GFF=genome/Araport11_GFF3_genes_transposons.201606.gff
 IDX_DIR=index
 
 PARAMS="--runThreadN 32
 	--runMode genomeGenerate
-        --genomeDir $IDX_DIR/$NAME
+        --genomeDir $IDX_DIR
         --genomeFastaFiles $FASTA
         --sjdbGTFfile $GTF
         --sjdbOverhang 99
