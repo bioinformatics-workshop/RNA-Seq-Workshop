@@ -18,9 +18,13 @@ IN_DIR=analysis/star
 OUT_DIR=analysis/featurecounts
 STRAND=0 # (0-unstrand, 1-strand, 2-reverse strand)
 GTF=genome/Araport11_GFF3_genes_transposons.201606.gtf
+FULL_MATRIX_FILE=/rhome/brandonle/bigdata/workshops/demo_files/analysis/featurecounts/featurecounts.txt
 
 # Create analysis folder (if it doesn't exist)
 [ ! -d "$OUT_DIR" ] && mkdir -p "$OUT_DIR"
+
+# Create a link to the full featurecounts table
+ln -s ${FULL_MATRIX_FILE} ${OUT_DIR}/featurecounts_full.txt
 
 ## Set featuercounts params
 # -p : indicates paired-end reads

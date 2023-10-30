@@ -11,8 +11,10 @@
 
 ################### Trim_galore.sh ###################
 
-# Load conda environment
+# Load modules
 module load trim_galore
+module load fastqc
+
 
 # Reading in variables
 SAMPLENAME=$1

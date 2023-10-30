@@ -11,7 +11,7 @@ library(glue)
 library(plotly)
 
 # Load count matrix file from featurecounts and clean up the header
-counts <- read_tsv("analysis/featurecounts/featurecounts.txt",
+counts <- read_tsv("analysis/featurecounts/featurecounts_full.txt",
           col_names=TRUE, skip=1)
 
 new_name <- str_extract(names(counts)[endsWith(names(counts), "bam")],
@@ -35,7 +35,7 @@ sampleinfo <- sampleinfo %>%
   as.matrix()
 
 write.table(as.data.frame(counts),
-  file = "analysis/featurecounts/count_matrix.csv",
+  file = "analysis/deseq2/genelists/count_matrix.csv",
   sep = ",",
   quote = FALSE,
   row.names = F)
